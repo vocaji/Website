@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inspirational Portfolio | Light in the Web</title>
+    <meta name="description" content="Jacob, BS Computer Science student: skills, projects, and guiding values.">
+    <meta name="theme-color" content="#18251D">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27%3E%3Crect width=%2740%27 height=%2740%27 rx=%278%27 fill=%27%2318251D%27/%3E%3Ccircle cx=%2720%27 cy=%2720%27 r=%277%27 fill=%27%23B7FF72%27/%3E%3Cpath d=%27M20 5v5M20 30v5M5 20h5M30 20h5M9 9l3 3M28 28l3 3M31 9l-3 3M12 28l-3 3%27 stroke=%27%23B7FF72%27 stroke-width=%272.5%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pages.css">
+    <script>if (localStorage.getItem("theme") === "light") document.documentElement.classList.add("light");</script>
+</head>
+<body>
+
+    <!-- TOP MENU (same on every page) -->
+    <nav>
+        <div class="wrap nav-inner">
+            <a class="brand" href="reflection.html">
+                <svg class="logo" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="20" cy="20" r="7" fill="currentColor"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4 4M28 28l4 4M32 8l-4 4M12 28l-4 4"/></svg>
+                <span><b>UNA ANG GINOO</b><small>LIGHT OF THE WORLD</small></span>
+            </a>
+            <div class="menu">
+                <a href="reflection.html">Reflection</a>
+                <a href="service.html">Service</a>
+                <a href="portfolio.html" class="active" aria-current="page">Portfolio</a>
+                <a href="learn.html">Learn</a>
+                <a href="faithtech.html">Faith &amp; Tech</a>
+                <a href="index.html" id="logoutLink">Logout</a>
+                <button type="button" class="icon-btn" id="themeBtn" aria-label="Switch light or dark">
+                    <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+                    <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="wrap">
+            <div>
+                <p class="hello">Hello, I'm</p>
+                <h1>Jacob</h1>
+                <p class="tagline">BSCS Student &bull; Future Developer &bull; Light of the World</p>
+                <p class="lead">I build simple things for the web, guided by faith, honesty, and service.</p>
+                <div class="hero-btns">
+                    <a class="btn" href="#projects">View My Projects</a>
+                    <a class="btn outline" href="#about">About Me</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ABOUT ME -->
+    <section class="block" id="about">
+        <div class="wrap">
+            <h2>About Me</h2>
+            <div class="about">
+                <img src="photo.jpg" alt="Photo of Jacob" class="profile-pic" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 fill=%22%2318251D%22/%3E%3Ccircle cx=%2220%22 cy=%2220%22 r=%227%22 fill=%22%23B7FF72%22/%3E%3Cpath d=%22M20 5v5M20 30v5M5 20h5M30 20h5M9 9l3 3M28 28l3 3M31 9l-3 3M12 28l-3 3%22 stroke=%22%23B7FF72%22 stroke-width=%222.5%22 stroke-linecap=%22round%22/%3E%3C/svg%3E'">
+                <div>
+                    <p class="text">
+                        Hi! I'm a BS Computer Science student from the Philippines who is passionate about technology, programming, and creative problem-solving. I enjoy learning how websites work and building clean, modern, and user-friendly interfaces using HTML, CSS, and JavaScript.
+
+As I continue my journey in Computer Science, I want to improve my coding skills, explore new technologies, and turn my ideas into useful digital projects. My goal is to become a skilled developer who creates meaningful solutions through technology. For me, every project is an opportunity to learn, experiment, and grow.
+                    </p>
+                    <ul class="info">
+                        <li>BS Computer Science</li>
+                        <li>Philippines</li>
+                        <li>HTML &bull; CSS &bull; JavaScript</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="block" id="skills">
+        <div class="wrap">
+            <h2>My Skills</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>HTML</h3>
+                    <p>I use HTML to structure web pages, organize content, and create essential website elements such as forms, navigation bars, login pages, and portfolio sections.</p>
+                </div>
+                <div class="card">
+                    <h3>CSS</h3>
+                    <p>I use CSS to style websites with colors, layouts, gradients, animations, hover effects, and responsive designs that make web pages look modern and user-friendly.</p>
+                </div>
+                <div class="card">
+                    <h3>JavaScript</h3>
+                    <p>I am learning JavaScript to make websites interactive through buttons, form validation, theme switching, dynamic content, and other features that improve the user experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="block" id="projects">
+        <div class="wrap">
+            <h2>Featured Projects</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3><a target="_blank" rel="noopener" href="https://vocaji.github.io/photo_booth/">GlowBooth</a></h3>
+                    <p>A simple photobooth published on github</p>
+                    <div class="tags"><span>Web</span><span>GitHub Pages</span></div>
+                </div>
+                <div class="card">
+                    <h3><a target="_blank" rel="noopener" href="https://vocaji.github.io/cicy/">CICY</a></h3>
+                    <p>A playful confession letter page</p>
+                    <div class="tags"><span>Web</span><span>GitHub Pages</span></div>
+                </div>
+                <div class="card">
+                    <h3><a target="_blank" rel="noopener" href="https://vocaji.github.io/quick.survey/">Quick survey</a></h3>
+                    <p>A playful survey page</p>
+                    <div class="tags"><span>Web</span><span>GitHub Pages</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOALS AND VALUES -->
+    <section class="block" id="values">
+        <div class="wrap">
+            <h2>My Goals and Guiding Values</h2>
+            <div class="panel">
+                <p class="text">
+                    My goals are to improve my coding skills, explore new technologies, and turn my ideas into useful digital projects as I continue my Computer Science journey.
+                </p>
+                <p class="text">
+  My guiding values are faith, honesty, and service. I believe in putting God first in everything I do, being truthful and responsible even when nobody is watching, and using my knowledge and skills to help others. As a Computer Science student, I want to use technology to create meaningful solutions, make a positive difference in my community, and reflect God's love through my actions.
+                </p>
+            </div>
+            <div class="verse">
+                &ldquo;Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.&rdquo;
+                <span>Matthew 5:16 (KJV)</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap foot">
+            <a class="brand" href="reflection.html">
+                <svg class="logo" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="20" cy="20" r="7" fill="currentColor"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4 4M28 28l4 4M32 8l-4 4M12 28l-4 4"/></svg>
+                <span><b>UNA ANG GINOO</b><small>LIGHT OF THE WORLD</small></span>
+            </a>
+            <span>All rights reserved. Jacob 2026</span>
+        </div>
+    </footer>
+
+    <script src="pages.js"></script>
+</body>
+</html>
