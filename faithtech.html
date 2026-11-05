@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#18251D">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27%3E%3Crect width=%2740%27 height=%2740%27 rx=%278%27 fill=%27%2318251D%27/%3E%3Ccircle cx=%2720%27 cy=%2720%27 r=%277%27 fill=%27%23B7FF72%27/%3E%3Cpath d=%27M20 5v5M20 30v5M5 20h5M30 20h5M9 9l3 3M28 28l3 3M31 9l-3 3M12 28l-3 3%27 stroke=%27%23B7FF72%27 stroke-width=%272.5%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Literata:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="pages.css">
     <script>if (localStorage.getItem("theme") === "light") document.documentElement.classList.add("light");</script>
 </head>
@@ -79,6 +79,47 @@
             <p class="text">Click the button to get a positive message to share.</p>
             <button type="button" class="btn" id="messageBtn">Get a message</button>
             <div id="messageBox" aria-live="polite">Your message will show here.</div>
+        </div>
+    </section>
+
+    <!-- VERSE OF THE DAY -->
+    <section class="block" id="verse">
+        <div class="wrap">
+            <h2>A Verse for Today</h2>
+            <p class="text">Start with a word worth sharing.</p>
+            <button type="button" class="btn" id="nextVerse">Show another verse</button>
+            <div class="verse" aria-live="polite">
+                <p id="verseText" style="margin:0"></p>
+                <span id="verseRef"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLESSING CARD MAKER -->
+    <section class="block" id="card">
+        <div class="wrap">
+            <h2>Make a Blessing Card</h2>
+            <p class="text">Write one kind sentence to someone, pick a verse, then copy it into a message.</p>
+            <div class="split">
+                <div class="form">
+                    <label for="cardTo">Who is it for?</label>
+                    <input type="text" id="cardTo" placeholder="A classmate, a friend, my family">
+                    <label for="cardMsg">Your message</label>
+                    <textarea id="cardMsg" rows="3" maxlength="140" placeholder="Thank you for being patient with me."></textarea>
+                    <p class="counter" id="count">0 / 140</p>
+                    <label for="cardVerse">Verse</label>
+                    <select id="cardVerse"></select>
+                </div>
+                <div>
+                    <div class="blessing" aria-live="polite">
+                        <p class="to" id="previewTo"></p>
+                        <p class="words" id="previewMsg"></p>
+                        <p class="ref" id="previewRef"></p>
+                    </div>
+                    <p style="margin:16px 0 0"><button type="button" class="btn" id="copyCard">Copy message</button></p>
+                    <p id="copyMsg" class="form msg" role="status"></p>
+                </div>
+            </div>
         </div>
     </section>
 

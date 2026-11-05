@@ -1,31 +1,42 @@
 /* ===== INSIDE PAGES STYLE ===== */
-/* Dark is the default. The sun button adds the class "light" to switch. */
+/* COLOR PLAN (60-30-10)
+   60%  dominant  = --dominant  : page background (soft sage)
+   30%  secondary = --secondary : cards, panels, nav, footer (deeper green)
+   10%  accent    = --accent    : buttons, links, underlines, highlights (fresh lime)
+   Dark is the default. The sun button adds the class "light" to switch. */
 :root {
-  --bg: #0e1611;
-  --surface: #18251D;                       /* Forest Graphite */
-  --soft: rgba(255, 255, 255, 0.04);
-  --border: rgba(183, 255, 114, 0.2);
-  --text: #ffffff;
-  --muted: rgba(255, 255, 255, 0.68);
-  --accent: #B7FF72;                        /* Acid Mint */
-  --btn-bg: #B7FF72;
-  --btn-text: #18251D;
-  --nav-bg: rgba(14, 22, 17, 0.88);
-  --glow: rgba(183, 255, 114, 0.12);
+  --font-head: "Bricolage Grotesque", "Trebuchet MS", Arial, sans-serif;  /* headings, menu, buttons */
+  --font-body: "Literata", Georgia, "Times New Roman", serif;                /* paragraph text */
+
+  --dominant: #1c2b22;                      /* 60% */
+  --secondary: #2a3e32;                     /* 30% */
+  --accent: #b4e58a;                        /* 10% */
+
+  --bg: var(--dominant);
+  --surface: var(--secondary);
+  --soft: rgba(42, 62, 50, 0.72);
+  --border: rgba(180, 229, 138, 0.2);
+  --text: #f3f8ef;
+  --muted: rgba(243, 248, 239, 0.74);
+  --btn-bg: var(--accent);
+  --btn-text: #1c2b22;
+  --nav-bg: rgba(28, 43, 34, 0.88);
+  --glow: rgba(180, 229, 138, 0.14);
+  --ease: cubic-bezier(0.22, 0.8, 0.28, 1);
 }
 
 :root.light {
-  --bg: #ffffff;
-  --surface: #f2f7ef;
-  --soft: #f6faf3;
-  --border: rgba(24, 37, 29, 0.16);
-  --text: #18251D;
-  --muted: #53635a;
-  --accent: #2f6b17;                        /* darker mint so it can be read on white */
-  --btn-bg: #18251D;
-  --btn-text: #B7FF72;
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --glow: rgba(183, 255, 114, 0.35);
+  --dominant: #f3f8ee;                      /* 60% */
+  --secondary: #dcead2;                     /* 30% */
+  --accent: #3f7a27;                        /* 10% (darker green so it reads on light) */
+
+  --soft: rgba(220, 234, 210, 0.7);
+  --border: rgba(40, 70, 40, 0.16);
+  --text: #1d2e22;
+  --muted: #55675a;
+  --btn-text: #ffffff;
+  --nav-bg: rgba(243, 248, 238, 0.9);
+  --glow: rgba(120, 190, 80, 0.28);
 }
 
 * { box-sizing: border-box; }
@@ -34,11 +45,12 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.6;
   color: var(--text);
   background: var(--bg);
-  transition: opacity 0.4s, background 0.3s, color 0.3s;
+  transition: opacity 0.4s var(--ease), background 0.4s ease, color 0.4s ease;
+  animation: pageIn 0.6s var(--ease) both;
 }
 
 /* used by pages.js for the fade out between pages */
@@ -50,6 +62,20 @@ body.leaving { opacity: 0; }
   padding: 0 24px;
 }
 
+/* ---------- ANIMATIONS ---------- */
+@keyframes pageIn { from { opacity: 0; } }
+@keyframes rise   { from { opacity: 0; transform: translateY(26px); } }
+@keyframes pop    { from { opacity: 0; transform: scale(0.94); } }
+@keyframes spin   { to { transform: rotate(360deg); } }
+
+/* scroll reveal (pages.js adds .reveal, then .in when it scrolls into view) */
+.reveal { opacity: 0; }
+.reveal.in {
+  opacity: 1;
+  animation: rise 0.7s var(--ease) backwards;
+  animation-delay: var(--d, 0s);
+}
+
 /* ---------- TOP MENU ---------- */
 nav {
   position: sticky;
@@ -58,6 +84,7 @@ nav {
   background: var(--nav-bg);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
+  transition: background 0.4s ease;
 }
 
 .nav-inner {
@@ -77,10 +104,11 @@ nav {
   color: var(--text);
   text-decoration: none;
 }
-.brand .logo { width: 38px; height: 38px; color: var(--accent); }
+.brand .logo { width: 38px; height: 38px; color: var(--accent); transition: transform 0.6s var(--ease); }
+.brand:hover .logo { transform: rotate(90deg); }
 .brand b {
   display: block;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-head);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.3em;
@@ -100,20 +128,33 @@ nav {
   gap: 4px;
 }
 .menu a {
+  position: relative;
   padding: 8px 12px;
   font-size: 14px;
   color: var(--muted);
   text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: 0.3s;
+  transition: color 0.3s ease;
+}
+/* underline that slides in */
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
 }
 .menu a:hover { color: var(--text); }
+.menu a:hover::after,
+.menu a.active::after,
+.menu a[aria-current="page"]::after { transform: scaleX(1); }
 .menu a:focus-visible { border-radius: 4px; }
 .menu a.active,
-.menu a[aria-current="page"] {
-  color: var(--text);
-  border-bottom-color: var(--accent);
-}
+.menu a[aria-current="page"] { color: var(--text); }
 
 /* sun / moon button */
 .icon-btn {
@@ -126,8 +167,9 @@ nav {
   border-radius: 8px;
   color: var(--text);
   cursor: pointer;
+  transition: color 0.3s ease, transform 0.4s var(--ease);
 }
-.icon-btn:hover { color: var(--accent); }
+.icon-btn:hover { color: var(--accent); transform: rotate(20deg); }
 .icon-btn svg { width: 20px; height: 20px; }
 .icon-btn .moon { display: none; }
 :root.light .icon-btn .sun { display: none; }
@@ -142,9 +184,11 @@ nav {
   background:
     radial-gradient(circle at 85% 15%, var(--glow), transparent 55%),
     radial-gradient(circle at 0 100%, var(--glow), transparent 45%);
+  --x: 78%;
+  --y: 30%;
 }
 
-/* rays of light on the right side */
+/* rays of light on the right side (turning very slowly) */
 .hero::before {
   content: "";
   position: absolute;
@@ -157,15 +201,35 @@ nav {
   -webkit-mask: radial-gradient(circle, #000 8%, transparent 68%);
   mask: radial-gradient(circle, #000 8%, transparent 68%);
   pointer-events: none;
+  animation: spin 120s linear infinite;
+}
+
+/* The glow that follows the pointer (pages.js moves --x and --y) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle 300px at var(--x) var(--y), var(--glow), transparent 70%);
 }
 
 .hero .wrap {
   position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   gap: 40px;
   align-items: center;
 }
+
+/* hero text comes in one line after another */
+.hero .wrap > div > * { animation: rise 0.8s var(--ease) backwards; }
+.hero .wrap > div > :nth-child(2) { animation-delay: 0.08s; }
+.hero .wrap > div > :nth-child(3) { animation-delay: 0.16s; }
+.hero .wrap > div > :nth-child(4) { animation-delay: 0.24s; }
+.hero .wrap > div > :nth-child(5) { animation-delay: 0.32s; }
+.hero .profile-pic { animation: pop 0.9s var(--ease) 0.2s backwards; }
 
 .hello {
   margin: 0;
@@ -176,7 +240,7 @@ nav {
 
 .hero h1 {
   margin: 4px 0 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-head);
   font-size: clamp(32px, 5vw, 52px);
   line-height: 1.15;
 }
@@ -216,7 +280,7 @@ nav {
   align-items: center;
   gap: 8px;
   padding: 12px 22px;
-  font-family: inherit;
+  font-family: var(--font-head);
   font-size: 14px;
   font-weight: 600;
   color: var(--btn-text);
@@ -225,17 +289,19 @@ nav {
   border-radius: 8px;
   text-decoration: none;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px var(--glow);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px var(--glow);
 }
+.btn:active { transform: translateY(0) scale(0.97); }
 .btn.outline {
   color: var(--text);
   background: transparent;
   border-color: var(--text);
 }
+.btn.outline:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ---------- SECTIONS ---------- */
 .block {
@@ -243,13 +309,13 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 
-/* section title with the small line under it */
+/* section title with the small line under it (the line grows when you see it) */
 .block h2 {
   position: relative;
   display: inline-block;
   margin: 0 0 28px;
   padding-bottom: 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-head);
   font-size: 22px;
 }
 .block h2::after {
@@ -260,7 +326,9 @@ nav {
   width: 28px;
   height: 2px;
   background: var(--accent);
+  transition: width 0.7s var(--ease) 0.2s;
 }
+.block h2.in::after { width: 64px; }
 
 .text {
   max-width: 760px;
@@ -288,18 +356,20 @@ nav {
   background: var(--soft);
   border: 1px solid var(--border);
   border-radius: 12px;
-  transition: 0.3s;
+  transition: border-color 0.3s ease, transform 0.4s var(--ease), box-shadow 0.4s ease;
 }
 .card:hover {
   border-color: var(--accent);
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 .card h3 { margin: 0 0 8px; font-size: 17px; }
 .card p { margin: 0 0 14px; font-size: 14px; color: var(--muted); }
 .card p:last-child { margin-bottom: 0; }
 
 .card h3 a { color: var(--text); text-decoration: none; }
-.card h3 a::after { content: " \2197"; color: var(--accent); }
+.card h3 a::after { content: " \2197"; color: var(--accent); display: inline-block; transition: transform 0.3s var(--ease); }
+.card:hover h3 a::after { transform: translate(3px, -3px); }
 
 /* small pills */
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -309,7 +379,64 @@ nav {
   color: var(--muted);
   border: 1px solid var(--border);
   border-radius: 99px;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
+.card:hover .tags span { color: var(--accent); border-color: var(--accent); }
+
+/* ---------- PHOTO CARDS (service page): photo only, text shows on hover ---------- */
+.photo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.photo-card {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.4s ease, transform 0.4s var(--ease);
+}
+.photo-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease), filter 0.6s ease;
+}
+.photo-card figcaption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  color: #f3f8ef;                           /* always light: it sits on a dark fade */
+  background: linear-gradient(to top, rgba(14, 26, 18, 0.94) 0%, rgba(14, 26, 18, 0.62) 55%, rgba(14, 26, 18, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.photo-card h3,
+.photo-card p {
+  transform: translateY(18px);
+  transition: transform 0.6s var(--ease);
+}
+.photo-card h3 { margin: 0 0 8px; font-size: 19px; color: #ffffff; }
+.photo-card p  { margin: 0; font-size: 14px; color: rgba(243, 248, 239, 0.9); transition-delay: 0.06s; }
+
+.photo-card:hover,
+.photo-card:focus { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22); }
+.photo-card:hover img,
+.photo-card:focus img { transform: scale(1.07); }
+.photo-card:hover figcaption,
+.photo-card:focus figcaption { opacity: 1; }
+.photo-card:hover h3, .photo-card:hover p,
+.photo-card:focus h3, .photo-card:focus p { transform: translateY(0); }
 
 /* ---------- ABOUT (portfolio) ---------- */
 .about {
@@ -362,24 +489,66 @@ nav {
   background: var(--soft);
   border: 1px solid var(--border);
   border-radius: 12px;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s ease;
 }
+.col:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12); }
 .col.good { border-color: var(--accent); }
-.col.bad  { border-color: #ff6666; }
+.col.bad  { border-color: #ff7a7a; }
+:root.light .col.bad { border-color: #b3261e; }
 .col h3 { margin: 0 0 8px; }
 .col ul { margin: 0; padding-left: 20px; color: var(--muted); }
 
-/* ---------- CLICK TO OPEN ---------- */
-details {
-  max-width: 760px;
-  margin: 0 0 12px;
+/* ---------- HOVER TO READ (learn page) ---------- */
+.hover-list { display: grid; gap: 12px; max-width: 760px; }
+
+.hover-item {
   padding: 14px 20px;
   background: var(--soft);
   border: 1px solid var(--border);
   border-radius: 10px;
+  cursor: default;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.4s var(--ease);
 }
-details[open] { border-color: var(--accent); }
-summary { cursor: pointer; font-weight: 600; }
-details p { margin: 10px 0 0; color: var(--muted); }
+.hover-q {
+  position: relative;
+  margin: 0;
+  padding-right: 28px;
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 600;
+}
+/* little arrow that turns when open */
+.hover-q::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 0.4s var(--ease);
+}
+/* the answer slides open without any jump */
+.hover-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.5s var(--ease), opacity 0.4s ease;
+}
+.hover-a > div { overflow: hidden; min-height: 0; }
+.hover-a p { margin: 10px 0 0; color: var(--muted); }
+
+.hover-item:hover,
+.hover-item:focus,
+.hover-item:focus-within { border-color: var(--accent); transform: translateX(4px); }
+.hover-item:hover .hover-a,
+.hover-item:focus .hover-a,
+.hover-item:focus-within .hover-a { grid-template-rows: 1fr; opacity: 1; }
+.hover-item:hover .hover-q::after,
+.hover-item:focus .hover-q::after,
+.hover-item:focus-within .hover-q::after { transform: translateY(-30%) rotate(225deg); }
 
 /* ---------- MESSAGE BUTTON ---------- */
 #messageBox {
@@ -398,6 +567,7 @@ details p { margin: 10px 0 0; color: var(--muted); }
 footer {
   background: var(--surface);
   border-top: 1px solid var(--border);
+  transition: background 0.4s ease;
 }
 .foot {
   display: flex;
@@ -418,6 +588,7 @@ footer {
   .hero .wrap { grid-template-columns: 1fr; }
   .about { grid-template-columns: 1fr; }
   .block { padding: 44px 0; }
+  .photo-card { aspect-ratio: 4 / 3; }
 }
 
 /* ---------- KEYBOARD FOCUS + REDUCED MOTION ---------- */
@@ -431,4 +602,105 @@ footer {
     animation: none !important;
     scroll-behavior: auto !important;
   }
+  .reveal { opacity: 1; }
+}
+
+/* =========================================================
+   Event details, table, form, steps, quiz and blessing card.
+   They use the same color variables as above, so the
+   light / dark button works on them too.
+   ========================================================= */
+
+/* Two columns that stack on small screens */
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+/* Event details */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px 28px;
+  margin: 0 0 32px;
+}
+.facts dt { font-weight: 600; color: var(--accent); }
+.facts dd { margin: 0; color: var(--muted); }
+
+/* Table */
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+caption { text-align: left; font-weight: 600; padding-bottom: 10px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--muted); }
+th { color: var(--text); background: var(--soft); }
+tbody tr { transition: background 0.3s ease; }
+tbody tr:hover { background: var(--soft); }
+
+/* Forms */
+.form label { display: block; margin: 14px 0 6px; font-size: 14px; font-weight: 600; }
+.form h3 { margin: 0 0 4px; }
+.form input, .form select, .form textarea {
+  width: 100%;
+  padding: 11px 14px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--glow);
+  outline: none;
+}
+.form .msg { min-height: 24px; margin: 12px 0; font-size: 14px; color: var(--accent); }
+.form .msg.error { color: #ff7a7a; }
+:root.light .form .msg.error { color: #b3261e; }
+.form .note { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
+.counter { margin: 4px 0 0; text-align: right; font-size: 12px; color: var(--muted); }
+
+/* Numbered steps (a real sequence, so numbers make sense) */
+.steps { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 14px; }
+.steps li { counter-increment: step; display: flex; align-items: center; gap: 14px; }
+.steps li::before {
+  content: counter(step);
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-weight: 700;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  transition: transform 0.4s var(--ease);
+}
+.steps li:hover::before { transform: scale(1.12); }
+
+/* Quiz */
+.question { margin: 0 0 18px; padding: 18px 20px; background: var(--soft); border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.4s ease; }
+.question legend { padding: 0 6px; font-weight: 600; }
+.choice { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0; font-size: 14px; color: var(--muted); cursor: pointer; transition: color 0.3s ease; }
+.choice:hover { color: var(--text); }
+.choice input { margin-top: 4px; accent-color: var(--accent); }
+.explain { margin: 10px 0 0; padding: 8px 12px; font-size: 13px; border-radius: 8px; color: var(--text); background: var(--soft); }
+.explain:not([hidden]) { animation: rise 0.5s var(--ease) backwards; }
+.question.right { border-color: var(--accent); }
+.question.wrong { border-color: #ff7a7a; }
+:root.light .question.wrong { border-color: #b3261e; }
+#quizResult { min-height: 24px; margin: 0 0 12px; font-weight: 600; color: var(--accent); }
+
+/* Blessing card */
+.blessing { min-height: 190px; padding: 24px; background: var(--surface); border: 1px solid var(--accent); border-radius: 14px; }
+.blessing .to { margin: 0; font-size: 18px; font-weight: 700; color: var(--accent); }
+.blessing .words { margin: 10px 0 14px; font-size: 18px; }
+.blessing .ref { margin: 0; font-size: 13px; font-style: italic; color: var(--muted); }
+
+/* Font roles: Bricolage Grotesque for menu, summaries, labels and table headers */
+.menu a, .form label, th, caption, .question legend, .facts dt, .blessing .to, .tags span {
+  font-family: var(--font-head);
 }

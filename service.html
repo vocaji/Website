@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#18251D">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27%3E%3Crect width=%2740%27 height=%2740%27 rx=%278%27 fill=%27%2318251D%27/%3E%3Ccircle cx=%2720%27 cy=%2720%27 r=%277%27 fill=%27%23B7FF72%27/%3E%3Cpath d=%27M20 5v5M20 30v5M5 20h5M30 20h5M9 9l3 3M28 28l3 3M31 9l-3 3M12 28l-3 3%27 stroke=%27%23B7FF72%27 stroke-width=%272.5%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Literata:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="pages.css">
     <script>if (localStorage.getItem("theme") === "light") document.documentElement.classList.add("light");</script>
 </head>
@@ -44,6 +44,10 @@
                 <h1>Community Service</h1>
                 <p class="tagline">Serving others is how the light is shared</p>
                 <p class="lead">Serving my community matters because even small acts of kindness can make a big difference. As a student, I can share my time, help others, and show God's love through my actions.</p>
+                <div class="hero-btns">
+                    <a class="btn" href="#initiative">Join the Drive</a>
+                    <a class="btn outline" href="#activities">How I Served</a>
+                </div>
             </div>
         </div>
     </header>
@@ -52,19 +56,28 @@
     <section class="block" id="activities">
         <div class="wrap">
             <h2>How I Served</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>Helping my classmates</h3>
-                    <p>I helped my classmates when they had difficulty understanding their schoolwork. I learned that sharing what I know and being patient with others are simple ways to show kindness.</p>
-                </div>
-                <div class="card">
-                    <h3>Keeping our school clean</h3>
-                    <p>I did my part in keeping our surroundings clean and organized. This reminded me that taking care of our environment is a shared responsibility, and every small effort counts.</p>
-                </div>
-                <div class="card">
-                    <h3>Showing kindness and support</h3>
-                    <p>I tried to treat others with respect, offer help when I could, and encourage people who needed support. I realized that we do not need to do something big to make someone feel valued.</p>
-                </div>
+            <div class="photo-cards">
+                <figure class="photo-card" tabindex="0">
+                    <img src="serve1.jpg" alt="Helping my classmates" loading="lazy" onerror="this.style.display='none'">
+                    <figcaption>
+                        <h3>Helping my classmates</h3>
+                        <p>I helped my classmates when they had difficulty understanding their schoolwork. I learned that sharing what I know and being patient with others are simple ways to show kindness.</p>
+                    </figcaption>
+                </figure>
+                <figure class="photo-card" tabindex="0">
+                    <img src="serve2.jpg" alt="Keeping our school clean" loading="lazy" onerror="this.style.display='none'">
+                    <figcaption>
+                        <h3>Keeping our school and community clean</h3>
+                        <p>I did my part in keeping our surroundings clean and organized. This reminded me that taking care of our environment is a shared responsibility, and every small effort counts.</p>
+                    </figcaption>
+                </figure>
+                <figure class="photo-card" tabindex="0">
+                    <img src="serve3.jpg" alt="Showing kindness and support" loading="lazy" onerror="this.style.display='none'">
+                    <figcaption>
+                        <h3>Showing kindness and support</h3>
+                        <p>I tried to treat others with respect, offer help when I could, and encourage people who needed support. I realized that we do not need to do something big to make someone feel valued.</p>
+                    </figcaption>
+                </figure>
             </div>
         </div>
     </section>
@@ -79,6 +92,52 @@
             <div class="verse">
                 &ldquo;Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.&rdquo;
                 <span>Matthew 5:16 (KJV)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMUNITY INITIATIVE (promotes an event and lets visitors sign up) -->
+    <!-- EDIT: the event details and the needs table below are a SAMPLE. Replace them with your real school, church or community initiative. -->
+    <section class="block" id="initiative">
+        <div class="wrap">
+            <h2>Light a Lamp for Tangub</h2>
+            <p class="text">A community clean-up and feeding drive by school and church youth, for the neighbors who are usually the last to hear about these things. A lamp is not for admiring. It is for helping people see.</p>
+
+            <dl class="facts">
+                <div><dt>When</dt><dd>Saturday, December 5, 2026, 7:00 AM to 12:00 NN</dd></div>
+                <div><dt>Where</dt><dd>Barangay covered court, Tangub City</dd></div>
+                <div><dt>Who</dt><dd>Students, church youth and neighbors</dd></div>
+            </dl>
+
+            <div class="split">
+                <div class="table-scroll">
+                    <table>
+                        <caption>What we still need</caption>
+                        <thead><tr><th scope="col">Item</th><th scope="col">Goal</th><th scope="col">Note</th></tr></thead>
+                        <tbody>
+                            <tr><td>Volunteers</td><td>30 people</td><td>Gloves and sacks provided</td></tr>
+                            <tr><td>Rice</td><td>50 kg</td><td>Packed on the same day</td></tr>
+                            <tr><td>Canned goods</td><td>100 cans</td><td>Please check expiry dates</td></tr>
+                            <tr><td>Drinking water</td><td>5 containers</td><td>For volunteers</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <form id="joinForm" class="panel form" novalidate>
+                    <h3>Tell us how you can help</h3>
+                    <label for="joinName">Your name</label>
+                    <input type="text" id="joinName" autocomplete="name">
+                    <label for="joinHow">How can you help?</label>
+                    <select id="joinHow">
+                        <option>Volunteer on the day</option>
+                        <option>Donate rice or canned goods</option>
+                        <option>Spread the word</option>
+                        <option>Pray for the drive</option>
+                    </select>
+                    <p id="joinMsg" class="msg" role="status"></p>
+                    <button type="submit" class="btn">Count me in</button>
+                    <p class="note">This is a demo form. Nothing you type is sent anywhere.</p>
+                </form>
             </div>
         </div>
     </section>

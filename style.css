@@ -1,12 +1,23 @@
 /* ===== LOGIN + SIGN UP STYLE ===== */
-/* Change the colors here and the whole page changes */
+/* COLOR PLAN (60-30-10)
+   60%  dominant  = --dominant  : page background (soft deep green)
+   30%  secondary = --secondary : the card, footer, autofill (lighter green)
+   10%  accent    = --accent    : buttons, links, focus lines, logo (fresh lime)
+   Change the colors here and the whole page changes */
 :root {
-  --bg: #0e1611;
-  --surface: #18251D;      /* Forest Graphite */
-  --accent: #B7FF72;       /* Acid Mint */
-  --text: #ffffff;
-  --muted: rgba(255, 255, 255, 0.68);
-  --border: rgba(183, 255, 114, 0.22);
+  --font-head: "Bricolage Grotesque", "Trebuchet MS", Arial, sans-serif;  /* headings, menu, buttons */
+  --font-body: "Literata", Georgia, "Times New Roman", serif;                /* paragraph text */
+
+  --dominant: #1c2b22;     /* 60% */
+  --secondary: #2a3e32;    /* 30% */
+  --accent: #b4e58a;       /* 10% */
+
+  --bg: var(--dominant);
+  --surface: var(--secondary);
+  --text: #f3f8ef;
+  --muted: rgba(243, 248, 239, 0.74);
+  --border: rgba(180, 229, 138, 0.22);
+  --ease: cubic-bezier(0.22, 0.8, 0.28, 1);
 }
 
 * { box-sizing: border-box; }
@@ -20,17 +31,26 @@ body {
   flex-direction: column;
   gap: 28px;
   padding: 40px 16px 20px;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: var(--font-body);
   color: var(--text);
   background:
-    radial-gradient(circle at 15% 10%, rgba(183, 255, 114, 0.16), transparent 50%),
-    radial-gradient(circle at 90% 95%, rgba(183, 255, 114, 0.10), transparent 45%),
-    linear-gradient(160deg, #18251D, #0b120e 70%);
+    radial-gradient(circle at 15% 10%, rgba(180, 229, 138, 0.14), transparent 50%),
+    radial-gradient(circle at 90% 95%, rgba(180, 229, 138, 0.09), transparent 45%),
+    linear-gradient(160deg, var(--secondary), var(--dominant) 70%);
   position: relative;
   overflow-x: hidden;
 }
 
-/* big faint rays of light in the background */
+/* ---------- ANIMATIONS ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(180, 229, 138, 0)); }
+  50%      { filter: drop-shadow(0 0 10px rgba(180, 229, 138, 0.55)); }
+}
+
+/* big faint rays of light in the background (turning very slowly) */
 body::before {
   content: "";
   position: fixed;
@@ -39,10 +59,11 @@ body::before {
   width: 950px;
   height: 950px;
   border-radius: 50%;
-  background: repeating-conic-gradient(rgba(183, 255, 114, 0.07) 0 5deg, transparent 5deg 15deg);
+  background: repeating-conic-gradient(rgba(180, 229, 138, 0.07) 0 5deg, transparent 5deg 15deg);
   -webkit-mask: radial-gradient(circle, #000 5%, transparent 68%);
   mask: radial-gradient(circle, #000 5%, transparent 68%);
   pointer-events: none;
+  animation: spin 140s linear infinite;
 }
 
 /* the card */
@@ -53,19 +74,35 @@ body::before {
   max-width: 420px;
   padding: 40px 36px 28px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(42, 62, 50, 0.6);
   border: 1px solid var(--border);
   border-radius: 24px;
   backdrop-filter: blur(14px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: rise 0.9s var(--ease) backwards;
 }
 
-.logo { width: 64px; height: 64px; color: var(--accent); }
+/* the things inside the card come in one by one */
+.login > * { animation: rise 0.7s var(--ease) backwards; }
+.login > :nth-child(1) { animation-delay: 0.10s; }
+.login > :nth-child(2) { animation-delay: 0.16s; }
+.login > :nth-child(3) { animation-delay: 0.22s; }
+.login > :nth-child(4) { animation-delay: 0.28s; }
+.login > :nth-child(5) { animation-delay: 0.34s; }
+.login > :nth-child(6) { animation-delay: 0.40s; }
+.login > :nth-child(7) { animation-delay: 0.46s; }
+.login > :nth-child(8) { animation-delay: 0.52s; }
+.login form .field { animation: rise 0.6s var(--ease) backwards; }
+.login form .field:nth-child(1) { animation-delay: 0.30s; }
+.login form .field:nth-child(2) { animation-delay: 0.38s; }
+.login form .field:nth-child(3) { animation-delay: 0.46s; }
+
+.logo { width: 64px; height: 64px; color: var(--accent); animation: glow 4s ease-in-out infinite; }
 
 .name {
   margin-top: 8px;
   padding-left: 0.35em;           /* balances the letter spacing */
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-head);
   font-size: 24px;
   font-weight: 500;
   letter-spacing: 0.35em;
@@ -81,7 +118,7 @@ body::before {
 
 .login h1 {
   margin: 32px 0 4px;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
 }
 
@@ -106,28 +143,33 @@ body::before {
   height: 20px;
   color: var(--muted);
   pointer-events: none;
+  transition: color 0.3s ease;
 }
+.field:focus-within .field-icon { color: var(--accent); }
 
 .login input {
   width: 100%;
   padding: 12px 40px 12px 36px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(243, 248, 239, 0.3);
   color: var(--text);
   font-size: 15px;
-  font-family: inherit;
+  font-family: var(--font-head);
   outline: none;
-  transition: 0.3s;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login input::placeholder { color: var(--muted); }
-.login input:focus { border-bottom-color: var(--accent); }
+.login input:focus {
+  border-bottom-color: var(--accent);
+  box-shadow: 0 1px 0 var(--accent);
+}
 
 /* keep browser autofill from turning the box white */
 .login input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 100px #18251D inset;
-  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0 100px #2a3e32 inset;
+  -webkit-text-fill-color: #f3f8ef;
 }
 
 input::-webkit-calendar-picker-indicator { display: none !important; }
@@ -147,8 +189,9 @@ input::-webkit-calendar-picker-indicator { display: none !important; }
   border: none;
   color: var(--muted);
   cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s var(--ease);
 }
-.eye:hover { color: var(--accent); }
+.eye:hover { color: var(--accent); transform: translateY(-50%) scale(1.15); }
 .eye svg { width: 20px; height: 20px; }
 .eye .off { display: none; }
 .eye.show .on { display: none; }
@@ -163,28 +206,29 @@ input::-webkit-calendar-picker-indicator { display: none !important; }
   gap: 10px;
   width: 100%;
   padding: 13px;
-  font-family: inherit;
+  font-family: var(--font-head);
   font-size: 15px;
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .btn-main {
   background: var(--accent);
-  color: #18251D;
+  color: #1c2b22;
   border: 1px solid var(--accent);
 }
 .btn-main:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(183, 255, 114, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(180, 229, 138, 0.3);
 }
+.btn-main:active { transform: translateY(0) scale(0.98); }
 
 .btn-ghost {
   background: transparent;
   color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(243, 248, 239, 0.25);
   font-weight: 500;
   font-size: 14px;
 }
@@ -198,8 +242,9 @@ input::-webkit-calendar-picker-indicator { display: none !important; }
   font-size: 14px;
   color: var(--accent);
   text-decoration: none;
+  transition: opacity 0.3s ease;
 }
-.login a:hover { text-decoration: underline; }
+.login a:hover { text-decoration: underline; opacity: 0.85; }
 
 .login a.inline-link {
   display: inline;
@@ -228,7 +273,7 @@ input::-webkit-calendar-picker-indicator { display: none !important; }
   content: "";
   flex: 1;
   height: 1px;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(243, 248, 239, 0.18);
 }
 
 /* messages */
@@ -236,7 +281,7 @@ input::-webkit-calendar-picker-indicator { display: none !important; }
   min-height: 16px;
   margin: 0 0 12px;
   font-size: 13px;
-  color: #ff6666;       /* errors stay red so they are easy to notice */
+  color: #ff7a7a;       /* errors stay red so they are easy to notice */
 }
 #msg {
   min-height: 16px;
@@ -249,6 +294,7 @@ input::-webkit-calendar-picker-indicator { display: none !important; }
   width: 100%;
   max-width: 420px;
   text-align: center;
+  animation: fade 1.2s ease 0.7s backwards;
 }
 .card-foot {
   margin-top: 0;
@@ -264,7 +310,7 @@ input::-webkit-calendar-picker-indicator { display: none !important; }
 .copy {
   margin: 14px 0 0;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(243, 248, 239, 0.5);
 }
 
 @media (max-width: 480px) {
@@ -296,10 +342,10 @@ input::-webkit-calendar-picker-indicator { display: none !important; }
 }
 .stage .login { margin: 0; flex: 0 0 420px; }
 
-.slogan { flex: 1; max-width: 440px; text-align: left; }
+.slogan { flex: 1; max-width: 440px; text-align: left; animation: rise 1s var(--ease) 0.1s backwards; }
 .slogan h2 {
   margin: 0 0 18px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-head);
   font-size: clamp(36px, 4.4vw, 54px);
   font-weight: 600;
   line-height: 1.12;

@@ -12,7 +12,7 @@ const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const eyeIcon = document.getElementById("eyeIcon");
 const errorMsg = document.getElementById("errorMsg");
-const googleBtn = document.getElementById("googleBtn");
+const forgotLink = document.getElementById("forgotLink");
 
 // ----- Login check -----
 form.addEventListener("submit", function (e) {
@@ -45,7 +45,8 @@ eyeIcon.addEventListener("click", function () {
     }
 });
 
-// ----- Google button (design only, not connected yet) -----
-googleBtn.addEventListener("click", function () {
-    errorMsg.textContent = "Google sign-in is not available yet.";
+// ----- Forgot password (demo: there is no email service, so we just explain) -----
+forgotLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    errorMsg.textContent = "Password reset is not available in this demo. Please create a new account.";
 });

@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#18251D">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 40 40%27%3E%3Crect width=%2740%27 height=%2740%27 rx=%278%27 fill=%27%2318251D%27/%3E%3Ccircle cx=%2720%27 cy=%2720%27 r=%277%27 fill=%27%23B7FF72%27/%3E%3Cpath d=%27M20 5v5M20 30v5M5 20h5M30 20h5M9 9l3 3M28 28l3 3M31 9l-3 3M12 28l-3 3%27 stroke=%27%23B7FF72%27 stroke-width=%272.5%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Literata:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="pages.css">
     <script>if (localStorage.getItem("theme") === "light") document.documentElement.classList.add("light");</script>
 </head>
@@ -78,29 +78,78 @@
         </div>
     </section>
 
+    <!-- PAUSE BEFORE YOU POST -->
+    <section class="block" id="pause">
+        <div class="wrap">
+            <h2>Pause Before You Post</h2>
+            <p class="text">Ask these four questions, in this order.</p>
+            <ol class="steps">
+                <li>Is it true?</li>
+                <li>Is it kind?</li>
+                <li>Does it help anyone?</li>
+                <li>Would I say it in front of my family and before God?</li>
+            </ol>
+        </div>
+    </section>
+
     <!-- LESSONS (click to open) -->
     <section class="block" id="lessons">
         <div class="wrap">
-            <h2>Learn More (click to open)</h2>
-            <details>
-                <summary>What is online kindness?</summary>
-                <p>Online kindness means treating others with respect on the internet.
-  It includes using kind words, supporting others, avoiding hurtful
-  comments, and thinking before posting or replying to something.</p>
-            </details>
-            <details>
-                <summary>Why is honesty important when creating digital content?</summary>
-                <p>Honesty is important because it helps people trust what we share
-  online. We should post truthful information, give credit to the
-  original creators, and avoid spreading fake news or misleading others.</p>
-            </details>
-            <details>
-                <summary>What can I do if I see bullying online?</summary>
-                <p>If I see bullying online, I will avoid joining in, support the person
-  being bullied, and report the harmful content. If necessary, I will
-  ask a trusted adult for help to make the online community safer
-  and more respectful.</p>
-            </details>
+            <h2>Learn More (hover to read)</h2>
+            <div class="hover-list">
+                <div class="hover-item" tabindex="0">
+                    <h3 class="hover-q">What is online kindness?</h3>
+                    <div class="hover-a"><div><p>Online kindness means treating others with respect on the internet. It includes using kind words, supporting others, avoiding hurtful comments, and thinking before posting or replying to something.</p></div></div>
+                </div>
+                <div class="hover-item" tabindex="0">
+                    <h3 class="hover-q">Why is honesty important when creating digital content?</h3>
+                    <div class="hover-a"><div><p>Honesty is important because it helps people trust what we share online. We should post truthful information, give credit to the original creators, and avoid spreading fake news or misleading others.</p></div></div>
+                </div>
+                <div class="hover-item" tabindex="0">
+                    <h3 class="hover-q">What can I do if I see bullying online?</h3>
+                    <div class="hover-a"><div><p>If I see bullying online, I will avoid joining in, support the person being bullied, and report the harmful content. If necessary, I will ask a trusted adult for help to make the online community safer and more respectful.</p></div></div>
+                </div>
+                <div class="hover-item" tabindex="0">
+                    <h3 class="hover-q">What if I already posted something unkind?</h3>
+                    <div class="hover-a"><div><p>Take it down, say sorry to the person, and decide how I will do better. It is never too late to make it right.</p></div></div>
+                </div>
+                <div class="hover-item" tabindex="0">
+                    <h3 class="hover-q">Is it wrong to use code I find online?</h3>
+                    <div class="hover-a"><div><p>No, learning from examples is normal. I should understand it, follow any license, give credit, and follow my teacher's rules about original work.</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MINI QUIZ -->
+    <section class="block" id="quiz">
+        <div class="wrap">
+            <h2>Try the Mini Quiz</h2>
+            <form id="quizForm">
+                <fieldset class="question" data-answer="b">
+                    <legend>You find a funny photo of a classmate who did not know it was taken. What do you do?</legend>
+                    <label class="choice"><input type="radio" name="q1" value="a"> Post it. Everyone will laugh.</label>
+                    <label class="choice"><input type="radio" name="q1" value="b"> Ask her first, and delete it if she says no.</label>
+                    <label class="choice"><input type="radio" name="q1" value="c"> Send it only to close friends.</label>
+                    <p class="explain" hidden>Photos belong to the people in them. Asking first is respect.</p>
+                </fieldset>
+                <fieldset class="question" data-answer="b">
+                    <legend>You used code from a website to finish a lab. What is the honest thing to do?</legend>
+                    <label class="choice"><input type="radio" name="q2" value="a"> Say nothing. It works, so it is fine.</label>
+                    <label class="choice"><input type="radio" name="q2" value="b"> Understand it, write it in my own way, and credit the source.</label>
+                    <label class="choice"><input type="radio" name="q2" value="c"> Rename the variables so it looks different.</label>
+                    <p class="explain" hidden>Learning from others is good. Hiding where it came from is not.</p>
+                </fieldset>
+                <fieldset class="question" data-answer="c">
+                    <legend>A shocking news post is spreading in your group chat and you are not sure it is true. What helps?</legend>
+                    <label class="choice"><input type="radio" name="q3" value="a"> Share it, just in case.</label>
+                    <label class="choice"><input type="radio" name="q3" value="b"> Argue with everyone who doubts it.</label>
+                    <label class="choice"><input type="radio" name="q3" value="c"> Check a trusted source first, and do not share it if I cannot confirm it.</label>
+                    <p class="explain" hidden>Passing along something false makes us part of the harm.</p>
+                </fieldset>
+                <p id="quizResult" role="status"></p>
+                <button type="button" class="btn" id="checkQuiz">Check my answers</button>
+            </form>
         </div>
     </section>
 

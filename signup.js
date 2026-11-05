@@ -17,7 +17,7 @@ form.addEventListener("submit", function (e) {
 
     // 1. passwords must match
     if (password !== confirm) {
-        msg.style.color = "#ff6666";
+        msg.style.color = "#ff7a7a";
         msg.textContent = "Passwords do not match.";
         return;
     }
@@ -31,7 +31,7 @@ form.addEventListener("submit", function (e) {
     });
 
     if (exists) {
-        msg.style.color = "#ff6666";
+        msg.style.color = "#ff7a7a";
         msg.textContent = "This email is already registered.";
         return;
     }
@@ -40,7 +40,7 @@ form.addEventListener("submit", function (e) {
     users.push({ email: email, password: password });
     localStorage.setItem("users", JSON.stringify(users));
 
-    msg.style.color = "#B7FF72";
+    msg.style.color = "var(--accent)";
     msg.textContent = "Account created! Going to login...";
 
     // 5. go to the login page after 1.5 seconds
